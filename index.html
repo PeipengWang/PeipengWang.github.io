@@ -44,6 +44,8 @@
             line-height: 1.6;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <header>
@@ -51,12 +53,22 @@
     <p>精于基础！熟于业务！广于工具！</p>
 </header>
 <nav>
-    <a href="https://github.com/PeipengWang/StudyProcess">基础</a>
-    <a href="#" onclick="toggleDropdown()">框架</a>
-    <a href="#" onclick="handleClick('Netty')">Netty</a>
-    <a href="#">读书笔记</a>
-    <a href="#">书架</a>
-    <a href="#">我的简历</a>
+    <div class="row">
+        <a class="col" href="https://github.com/PeipengWang/StudyProcess">基础</a>
+        <a class="col" href="#" onclick="toggleDropdown()">框架</a>
+        <a class="col" href="/context.html?param=Netty" onclick="handleClick('Netty')">Netty</a>
+        <a class="col" href="#">读书笔记</a>
+        <a class="col" href="#">书架</a>
+        <a class="col" href="#">我的简历</a>
+        <a class="col dropdown-toggle nav-item dropdown" data-bs-toggle="dropdown" href="#">下拉框</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Link 1</a>
+                <a class="dropdown-item" href="#">Link 2</a>
+                <a class="dropdown-item" href="#">Link 3</a>
+            </div>
+        </a>
+    </div>
+
 </nav>
 <div class="container">
     <div id="navigation"></div>
@@ -68,51 +80,12 @@
         <h2>Post Title 2</h2>
         <p>This is the content of my second blog post. Integer vitae ex nec odio tincidunt fringilla. Nam sed metus auctor, varius turpis ut, lacinia ex.</p>
     </div>
-    <!-- Add more posts here -->
 </div>
     <script>
      // JavaScript 函数用于切换下拉框的显示状态
     function toggleDropdown() {
         var dropdown = document.getElementById('framework-dropdown');
         dropdown.classList.toggle('active');
-    }
-    // JavaScript 函数用于处理点击事件
-    function handleClick(framework) {
-    // GitHub 仓库信息
-    var username = 'PeipengWang';
-    var repo = 'StudyProcess';
-    var path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件'); // 文件夹路径
-
-    // GitHub API URL
-    var githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
-
-    // 获取 GitHub 仓库的目录结构
-    fetch(githubApiUrl)
-        .then(response => {
-            // 检查响应状态
-            if (!response.ok) {
-                throw new Error('Failed to fetch directory contents');
-            }
-            // 返回 JSON 格式的响应内容
-            return response.json();
-        }).then(contents => {
-            // 创建导航栏
-            var navigation = document.getElementById('navigation');
-            var navList = document.createElement('ul');
-            contents.forEach(item => {
-                // 创建列表项并添加到导航栏中
-                var listItem = document.createElement('li');
-                var link = document.createElement('a');
-                link.textContent = item.name;
-                link.href = item.html_url; // 文件夹的 URL
-                listItem.appendChild(link);
-                navList.appendChild(listItem);
-            });
-            navigation.appendChild(navList);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
     }
 </script>
 </body>  
