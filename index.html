@@ -43,6 +43,15 @@
         .post p {
             line-height: 1.6;
         }
+     /* 隐藏下拉框中的选项 */
+        #framework-dropdown {
+            display: none;
+        }
+
+        /* 设置下拉框的样式 */
+        #framework-dropdown.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +61,16 @@
 </header>
 <nav>
     <a href="https://github.com/PeipengWang/StudyProcess">基础</a>
-    <a href="#">框架</a>
+   <div class="dropdown">
+        <a href="#" onclick="toggleDropdown()">框架 ▼</a>
+        <div id="framework-dropdown">
+            <div id="framework-dropdown" style="display: none;">
+                <a href="#" onclick="handleClick('Netty')">React</a>
+                <a href="#" onclick="handleClick('Angular')">Angular</a>
+                <a href="#" onclick="handleClick('Vue.js')">Vue.js</a>
+            </div>
+        </div>
+    </div>
     <a href="#">读书笔记</a>
     <a href="#">书架</a>
     <a href="#">我的简历</a>
@@ -70,6 +88,13 @@
     <!-- Add more posts here -->
 </div>
     <script>
+     // JavaScript 函数用于切换下拉框的显示状态
+    function toggleDropdown() {
+        var dropdown = document.getElementById('framework-dropdown');
+        dropdown.classList.toggle('active');
+    }
+    // JavaScript 函数用于处理点击事件
+    function handleClick(framework) {
     // GitHub 仓库信息
     var username = 'PeipengWang';
     var repo = 'StudyProcess';
@@ -105,6 +130,7 @@
         .catch(error => {
             console.error('Error:', error);
         });
+    }
 </script>
 </body>  
 </html>
