@@ -58,6 +58,7 @@
     <a href="#">我的简历</a>
 </nav>
 <div class="container">
+    <div id="navigation"></div>
     <div class="post">
         <h2>Post Title 1</h2>
         <p>This is the content of my first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut turpis nec ligula congue volutpat vel et odio.</p>
@@ -68,5 +69,42 @@
     </div>
     <!-- Add more posts here -->
 </div>
-</body>
+    <script>
+    // GitHub 仓库信息
+    var username = 'PeipengWang';
+    var repo = 'StudyProcess';
+    var path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件'); // 文件夹路径
+
+    // GitHub API URL
+    var githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
+
+    // 获取 GitHub 仓库的目录结构
+    fetch(githubApiUrl)
+        .then(response => {
+            // 检查响应状态
+            if (!response.ok) {
+                throw new Error('Failed to fetch directory contents');
+            }
+            // 返回 JSON 格式的响应内容
+            return response.json();
+        }).then(contents => {
+            // 创建导航栏
+            var navigation = document.getElementById('navigation');
+            var navList = document.createElement('ul');
+            contents.forEach(item => {
+                // 创建列表项并添加到导航栏中
+                var listItem = document.createElement('li');
+                var link = document.createElement('a');
+                link.textContent = item.name;
+                link.href = item.html_url; // 文件夹的 URL
+                listItem.appendChild(link);
+                navList.appendChild(listItem);
+            });
+            navigation.appendChild(navList);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+</body>  
 </html>
