@@ -43,15 +43,6 @@
         .post p {
             line-height: 1.6;
         }
-     /* 隐藏下拉框中的选项 */
-        #framework-dropdown {
-            display: none;
-        }
-
-        /* 设置下拉框的样式 */
-        #framework-dropdown.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -61,16 +52,8 @@
 </header>
 <nav>
     <a href="https://github.com/PeipengWang/StudyProcess">基础</a>
-   <div class="dropdown">
-        <a href="#" onclick="toggleDropdown()">框架 ▼</a>
-        <div id="framework-dropdown">
-            <div id="framework-dropdown" style="display: none;">
-                <a href="#" onclick="handleClick('Netty')">React</a>
-                <a href="#" onclick="handleClick('Angular')">Angular</a>
-                <a href="#" onclick="handleClick('Vue.js')">Vue.js</a>
-            </div>
-        </div>
-    </div>
+    <a href="#" onclick="toggleDropdown()">框架</a>
+    <a href="#" onclick="handleClick('Netty')">Netty</a>
     <a href="#">读书笔记</a>
     <a href="#">书架</a>
     <a href="#">我的简历</a>
