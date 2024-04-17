@@ -60,7 +60,8 @@
 <script>
   let username = 'PeipengWang';
   let repo = 'StudyProcess';
-  const nettyValue = getQueryParam('param');
+  const param = getQueryParam('param');
+  handleClick(param);
   handleClick(nettyValue);
 
   function getQueryParam(param) {
