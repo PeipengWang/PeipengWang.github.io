@@ -53,23 +53,20 @@
     <p>精于基础！熟于业务！广于工具！</p>
 </header>
 <nav>
-    <div class="row">
-        <a class="col" href="https://github.com/PeipengWang/StudyProcess">基础</a>
-        <a class="col" href="#" onclick="toggleDropdown()">框架</a>
-        <a class="col" href="/context.html?param=Netty" onclick="handleClick('Netty')">Netty</a>
-        <a class="col" href="#">读书笔记</a>
-        <a class="col" href="#">书架</a>
-        <a class="col" href="#">我的简历</a>
-        <a class="col dropdown-toggle nav-item dropdown" data-bs-toggle="dropdown" href="#">下拉框</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Link 1</a>
-                <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
-            </div>
-        </a>
+  <div class="row align-items-center">
+    <a class="col text-center" href="https://github.com/PeipengWang/StudyProcess">基础</a>
+    <div class="col dropdown">
+      <a class="dropdown-toggle nav-item text-center" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">框架</a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/context.html?param=Netty" onclick="handleClick('Netty')">Netty</a></li>
+        <li><a class="dropdown-item" href="/context.html?param=Spring" onclick="handleClick('Spring')">Spring</a></li>
+        <li><a class="dropdown-item" href="/context.html?param=Mybatis" onclick="handleClick('Mybatis')">Mybatis</a></li>
+      </ul>
     </div>
-
+    <a class="col text-center" href="#">书架</a>
+  </div>
 </nav>
+
 <div class="container">
     <div id="navigation"></div>
     <div class="post">
