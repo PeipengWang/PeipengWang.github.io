@@ -98,6 +98,9 @@
     if(framework === 'Mybatis'){
       path = encodeURIComponent('框架/Mybatis');
     }
+    if (framework === 'kafka') {
+          path = encodeURIComponent('中间件/消息中间件/kafka');
+    }
     // GitHub API URL
     let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
     // 获取 GitHub 仓库的目录结构
