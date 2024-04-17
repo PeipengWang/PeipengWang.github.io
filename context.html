@@ -89,9 +89,15 @@
 
 
   function handleClick(framework) {
-    let path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
+   let path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
     if (framework === 'Netty') {
       path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
+    }
+    if(framework === 'Spring'){
+      path = encodeURIComponent('框架/Spring');
+    }
+    if(framework === 'Mybatis'){
+      path = encodeURIComponent('框架/Mybatis');
     }
     // GitHub API URL
     let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
