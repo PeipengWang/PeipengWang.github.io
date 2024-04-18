@@ -101,6 +101,9 @@
     if (framework === 'kafka') {
           path = encodeURIComponent('中间件/消息中间件/kafka');
     }
+    if (framework === 'k8s') {
+      path = encodeURIComponent('k8s');
+    }
     // GitHub API URL
     let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
     // 获取 GitHub 仓库的目录结构
@@ -124,7 +127,9 @@
         let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + encodeURIComponent(item.path);
         link.href = '#' + item.name;
         link.addEventListener('click', function() {
-          loadMarkdown(rawUrl);
+          if(rawUrl.endsWith("md")){
+            loadMarkdown(rawUrl);
+          }
         });
         link.classList.add('nav-link');
         listItem.appendChild(link);
