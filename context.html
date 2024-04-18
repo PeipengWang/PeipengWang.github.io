@@ -124,7 +124,9 @@
         let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + encodeURIComponent(item.path);
         link.href = '#' + item.name;
         link.addEventListener('click', function() {
-          loadMarkdown(rawUrl);
+          if(rawUrl.endsWith(".md")){
+            loadMarkdown(rawUrl);
+          }
         });
         link.classList.add('nav-link');
         listItem.appendChild(link);
