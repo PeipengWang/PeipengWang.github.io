@@ -123,17 +123,18 @@
         // 创建列表项并添加到导航栏中
         var listItem = document.createElement('li');
         var link = document.createElement('a');
-        link.textContent = item.name;
-        let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + encodeURIComponent(item.path);
-        link.href = '#' + item.name;
-        link.addEventListener('click', function() {
-          if(rawUrl.endsWith("md")){
+        var path = encodeURIComponent(item.path);
+        if(path.endsWith(".md")){
+          link.textContent = item.name;
+          let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + path;
+          link.href = '#' + item.name;
+          link.addEventListener('click', function() {
             loadMarkdown(rawUrl);
-          }
-        });
-        link.classList.add('nav-link');
-        listItem.appendChild(link);
-        navList.appendChild(listItem);
+          });
+          link.classList.add('nav-link');
+          listItem.appendChild(link);
+          navList.appendChild(listItem);
+        }
       });
       navigation.appendChild(navList);
     }).catch(error => {
