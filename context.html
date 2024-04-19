@@ -119,12 +119,11 @@
       var navigation = document.getElementById('navigation');
       var navList = document.createElement('ul');
       contents.forEach(item => {
-        console.log(item);
         // 创建列表项并添加到导航栏中
-        var listItem = document.createElement('li');
-        var link = document.createElement('a');
         var path = encodeURIComponent(item.path);
         if(path.endsWith(".md")){
+          var listItem = document.createElement('li');
+          var link = document.createElement('a');
           link.textContent = item.name;
           let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + path;
           link.href = '#' + item.name;
