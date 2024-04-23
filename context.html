@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <style>
         /* Custom CSS */
@@ -90,7 +90,6 @@
 
     function handleClick(framework) {
         let path  = encodeURIComponent('k8s');
-        let token = "Z2hwX0NlSVp3SlRkZFNEcW5aYXlHRDdvZG9MbEU3QlVPeTRWTG1uWA==";
         if (framework === 'Netty') {
             path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
         }
@@ -109,7 +108,7 @@
         // GitHub API URL
         let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
         // 获取 GitHub 仓库的目录结构
-        fetch(githubApiUrl, {headers: { "Authorization": "token " + atob(token)} }
+        fetch(githubApiUrl, {headers: {} }
         ).then(response => {
             // 检查响应状态
             if (!response.ok) {
