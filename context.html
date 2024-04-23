@@ -135,7 +135,9 @@
 
     function handleClick(framework) {
         let path  = encodeURIComponent('Java基础');
-        if (framework === 'Netty') {
+       if (framework === 'JavaBase') {
+           path  = encodeURIComponent('Java基础');
+        }elseif (framework === 'Netty') {
             path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
         }else if(framework === 'Spring'){
             path = encodeURIComponent('框架/Spring');
