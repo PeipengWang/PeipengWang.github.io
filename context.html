@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -14,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <style>
         body {
-            font-family: KaiTi, STKaiti, "楷体", serif;
+            /*font-family: KaiTi, STKaiti, "楷体", serif;*/
             margin: 0;
             padding: 0;
         }
@@ -37,6 +39,31 @@
             padding: 8px 0; /* 添加垂直间隔 */
             display: block; /* 将链接元素转换为块级元素以充满父容器的宽度 */
         }
+
+        /* 下角标号样式 */
+        .dropdown-toggle::after {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            vertical-align: middle;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            margin-left: .25em;
+        }
+        #markdown-content {
+            font-family: Arial, sans-serif; /* 设置字体 */
+            font-size: 16px; /* 设置字体大小 */
+            line-height: 2; /* 设置行高 */
+            padding-left: 10rem; /* 设置左侧内边距 */
+            padding-right: 20rem; /* 设置右侧内边距 */
+
+        }
+        #markdown-content p {
+            margin-bottom: 20px; /* 增加段落之间的行距 */
+        }
     </style>
 </head>
 <body>
@@ -58,6 +85,11 @@
                         </a>
                     </div>
                 </li>
+                <hr class="my-3"> <!-- 添加一个水平分隔线 -->
+                <div id="directory-container">
+                    <ul id="menuList" class="nav flex-column">
+                    </ul>
+                </div>
                 <hr class="my-3"> <!-- 添加一个水平分隔线 -->
                 <div id="navigation"></div>
             </ul>
@@ -102,27 +134,24 @@
 
 
     function handleClick(framework) {
-        let path  = encodeURIComponent('k8s');
+        let path  = encodeURIComponent('Java基础');
         if (framework === 'Netty') {
             path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
-        }
-        if(framework === 'Spring'){
+        }else if(framework === 'Spring'){
             path = encodeURIComponent('框架/Spring');
-        }
-        if(framework === 'Mybatis'){
+        } else if(framework === 'Mybatis'){
             path = encodeURIComponent('框架/Mybatis');
-        }
-        if (framework === 'kafka') {
+        } else if (framework === 'kafka') {
             path = encodeURIComponent('中间件/消息中间件/kafka');
-        }
-        if (framework === 'k8s') {
+        } else if (framework === 'k8s') {
             path = encodeURIComponent('k8s');
+        }else if(framework !== null){
+            path = encodeURIComponent(framework);
         }
         // GitHub API URL
         let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
         // 获取 GitHub 仓库的目录结构
-        fetch(githubApiUrl, {headers: {} }
-        ).then(response => {
+        fetch(githubApiUrl, {headers: {} }).then(response => {
             // 检查响应状态
             if (!response.ok) {
                 throw new Error('Failed to fetch directory contents');
@@ -132,30 +161,77 @@
         }).then(contents => {
             // 创建导航栏
             var navigation = document.getElementById('navigation');
-            var navList = document.createElement('ul');
             contents.forEach(item => {
-                // 创建列表项并添加到导航栏中
-                var path = encodeURIComponent(item.path);
-                if(path.endsWith(".md")){
-                    var listItem = document.createElement('li');
-                    var link = document.createElement('a');
-                    link.textContent = item.name;
-                    let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + path;
-                    link.href = '#' + item.name;
-                    link.addEventListener('click', function() {
-                        loadMarkdown(rawUrl);
-                    });
-                    link.classList.add('nav-link');
-                    listItem.appendChild(link);
-                    navList.appendChild(listItem);
+                if(item.path.endsWith(".md")){
+                   addMdMenu(item, navigation);
+                }else if(item.type === 'dir'){
+                    generateMenuItems(item)
                 }
             });
-            navigation.appendChild(navList);
         }).catch(error => {
             console.error('Error:', error);
         });
 
     }
+
+    function generateMenuItems(item) {
+        let rawUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + encodeURIComponent(item.path);
+        const menuList = document.getElementById('menuList');
+        const menuItem = document.createElement('li');
+        menuItem.classList.add('nav-item');
+        menuItem.setAttribute('name', item.name); // Set unique identifier for each menu item
+        const link = document.createElement('a');
+        link.classList.add('nav-link');
+        // link.setAttribute('data-bs-toggle', 'collapse');
+        // link.setAttribute('aria-expanded', 'false');
+        link.textContent = item.name;
+        link.onclick = () => handleClick(item.name);
+        link.setAttribute('name', item.name);
+        loadSubmenu(rawUrl, item.name)
+        menuItem.appendChild(link);
+        menuList.appendChild(menuItem);
+    }
+
+    function loadSubmenu(url, htmlName) {
+        fetch(url, {headers: {} }).then(response => {
+            // 检查响应状态
+            if (!response.ok) {
+                throw new Error('Failed to fetch directory contents');
+            }
+            // 返回 JSON 格式的响应内容
+            return response.json();
+        }).then(submenuData => {
+            const submenu =  document.querySelector(`.nav-item a[name="${htmlName}"]`);
+            // 清空任何现有的子菜单项
+            // submenu.innerHTML = '';
+            // 循环遍历子菜单数据并创建列表项
+            submenuData.forEach(item => {
+                addMdMenu(item, submenu);
+            });
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+
+    function addMdMenu(item,  navigation){
+        let navList = document.createElement('ul');
+        var path = encodeURIComponent(item.path);
+        if(!path.endsWith(".md")) return;
+        let rawUrl = "https://raw.githubusercontent.com/" + username + '/' + repo + "/main/" + path;
+        var listItem = document.createElement('li');
+        var link = document.createElement('a');
+        link.textContent = item.name;
+        link.href = '#' + item.name;
+        link.addEventListener('click', function() {
+            loadMarkdown(rawUrl);
+        });
+        link.classList.add('nav-link');
+        listItem.appendChild(link);
+        navList.appendChild(listItem);
+        navigation.appendChild(navList);
+    }
+
 </script>
 
 </body>
