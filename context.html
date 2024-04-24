@@ -29,7 +29,11 @@
             overflow-y: auto;
         }
         #markdown-content {
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            padding-left: 1rem; /* 调整左侧内边距 */
+            padding-right: 1rem; /* 调整右侧内边距 */
         }
         /* 去掉链接的下划线并添加间隔 */
         .nav-link {
@@ -38,30 +42,25 @@
             display: block; /* 将链接元素转换为块级元素以充满父容器的宽度 */
         }
 
-        /* 下角标号样式 */
-        .dropdown-toggle::after {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            vertical-align: middle;
-            content: "";
-            border-top: .3em solid;
-            border-right: .3em solid transparent;
-            border-bottom: 0;
-            border-left: .3em solid transparent;
-            margin-left: .25em;
-        }
         #markdown-content {
-            font-family: Arial, sans-serif; /* 设置字体 */
-            font-size: 16px; /* 设置字体大小 */
-            line-height: 2; /* 设置行高 */
-            padding-left: 10rem; /* 设置左侧内边距 */
-            padding-right: 20rem; /* 设置右侧内边距 */
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 2;
+            padding-left: 10rem; /* 默认左侧内边距 */
+            padding-right: 20rem; /* 默认右侧内边距 */
+        }
 
+        /* 媒体查询：当屏幕宽度小于768px时应用以下样式 */
+        @media (max-width: 768px) {
+            #markdown-content {
+                padding-left: 1rem; /* 小屏幕左侧内边距 */
+                padding-right: 1rem; /* 小屏幕右侧内边距 */
+            }
         }
-        #markdown-content p {
-            margin-bottom: 20px; /* 增加段落之间的行距 */
-        }
+
+        /*#markdown-content p {*/
+        /*    margin-bottom: 20px; !* 增加段落之间的行距 *!*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -69,8 +68,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="col-12 col-md-4 col-lg-3 bg-light sidebar navbar-text">
-            <!-- Sidebar content -->
+        <nav id="sidebarMenu" class="col-12 col-md-3 col-lg-2 bg-light sidebar navbar-text">
             <form class="form-inline">
                 <input class="form-control mb-2" type="text" placeholder="Search">
             </form>
@@ -84,17 +82,13 @@
                     </div>
                 </li>
                 <hr class="my-3"> <!-- 添加一个水平分隔线 -->
-                <div id="directory-container">
-                    <ul id="menuList" class="nav flex-column">
-                    </ul>
-                </div>
+                <div id="menuList" class="nav flex-column"></div>
                 <hr class="my-3"> <!-- 添加一个水平分隔线 -->
                 <div id="navigation"></div>
             </ul>
         </nav>
 
-
-        <div id="markdown-content" class="col-12 col-md-8 col-lg-9">
+        <div id="markdown-content" class="col-12 col-md-9 col-lg-10">
             <!-- Markdown content will be loaded here -->
         </div>
     </div>
