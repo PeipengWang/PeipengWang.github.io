@@ -152,7 +152,17 @@
             path = encodeURIComponent('Java/Java8新特性');
         } else if (framework === 'Mysql') {
             path = encodeURIComponent('数据库/Mysql');
-        }else if(framework !== null){
+        } else if (framework === 'Oracle') {
+        path = encodeURIComponent('数据库/Oracle');
+      }  else if (framework === 'Postgresql') {
+           path = encodeURIComponent('数据库/Postgresql');
+       } else if (framework === 'Redis') {
+           path = encodeURIComponent('数据库/Redis');
+       } else if (framework === 'ES') {
+           path = encodeURIComponent('数据库/ElasticSearch');
+       }else if (framework === 'MongDB') {
+           path = encodeURIComponent('数据库/MongDB');
+       } else if(framework !== null){
             path = encodeURIComponent(framework);
         }
         // GitHub API URL
