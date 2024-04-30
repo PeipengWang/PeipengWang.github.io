@@ -162,9 +162,13 @@
            path = encodeURIComponent('数据库/Redis');
        } else if (framework === 'ES') {
            path = encodeURIComponent('数据库/ElasticSearch');
-       }else if (framework === 'MongDB') {
-           path = encodeURIComponent('数据库/MongDB');
-       } else if(framework !== null){
+       }else if (framework === 'NetWork') {
+           path = encodeURIComponent('计算机网络');
+       } else if (framework === 'Al') {
+        path = encodeURIComponent('算法与数据结构');
+      } else if (framework === 'C') {
+           path = encodeURIComponent('操作系统');
+       }else if(framework !== null){
             path = encodeURIComponent(framework);
         }
         // GitHub API URL
