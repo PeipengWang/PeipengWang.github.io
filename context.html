@@ -129,7 +129,7 @@
     function handleClick(framework) {
         let path  = encodeURIComponent(framework);
        if (framework === 'JavaBase') {
-           path  = encodeURIComponent('Java基础');
+           path  = encodeURIComponent('Java/Java基础');
         }else if (framework === 'Netty') {
             path = encodeURIComponent('网络编程/Netty 核心原理剖析与 RPC 实践_课件');
         }else if(framework === 'Spring'){
@@ -151,7 +151,7 @@
         }else if(framework === 'JUC'){
            path  = encodeURIComponent('Java/JUC');
        } else if (framework === 'Java8') {
-            path = encodeURIComponent('Java/Java8新特性');
+            path = encodeURIComponent('Java/Java新特性');
         } else if (framework === 'Mysql') {
             path = encodeURIComponent('数据库/Mysql');
         } else if (framework === 'Oracle') {
@@ -161,14 +161,21 @@
        } else if (framework === 'Redis') {
            path = encodeURIComponent('数据库/Redis');
        } else if (framework === 'ES') {
-           path = encodeURIComponent('数据库/ElasticSearch');
+           path = encodeURIComponent('数据库/ES');
        }else if (framework === 'NetWork') {
            path = encodeURIComponent('计算机网络');
        } else if (framework === 'Al') {
-        path = encodeURIComponent('算法与数据结构');
-      } else if (framework === 'C') {
-           path = encodeURIComponent('操作系统');
-       }else if(framework !== null){
+        path = encodeURIComponent('数据结构与算法');
+      } else if (framework === 'System') {
+           path = encodeURIComponent('计算机操作系统');
+       }else if(framework === 'SpringCloud'){
+           path = encodeURIComponent('分布式架构/SpringCloud');
+       }else if(framework === 'Dubbo'){
+           path = encodeURIComponent('分布式架构/Dubbo');
+       }else if(framework === 'nginx'){
+           path = encodeURIComponent('分布式架构/nginx');
+       }
+       else if(framework !== null){
             path = encodeURIComponent(framework);
         }
         // GitHub API URL
