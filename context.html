@@ -174,9 +174,8 @@
            path = encodeURIComponent('分布式架构/Dubbo');
        }else if(framework === 'nginx'){
            path = encodeURIComponent('分布式架构/nginx');
-       }
-       else if(framework !== null){
-            path = encodeURIComponent(framework);
+       } else if(framework !== 'ZK'){
+            path = encodeURIComponent('中间件/服务注册与服务发现/ZooKeeper');
         }
         // GitHub API URL
         let githubApiUrl = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + path;
